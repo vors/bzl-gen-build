@@ -59,7 +59,7 @@ wheel_scanner_aspect = aspect(
     attr_aspects = [],
     attrs = {
         "_py_exe": attr.label(
-            default = Label("@external_build_tooling_gen//:python-entity-extractor"),
+            default = Label("//:python-entity-extractor"),
             allow_files = True,
             cfg = "host",
         ),

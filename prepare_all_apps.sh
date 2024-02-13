@@ -27,10 +27,10 @@ if [ ! -d "$PREPARE_ALL_OUTPUT_DIR" ]; then
 fi
 
 echo "running Scala and Python generator building"
-OUTPUT_DIR=$PREPARE_ALL_OUTPUT_DIR language_generators/scala-defref-extractor/build_native.sh
+# OUTPUT_DIR=$PREPARE_ALL_OUTPUT_DIR language_generators/scala-defref-extractor/build_native.sh
 
 cd crates
-cargo build $CARGO_EXTRA_ARGS --release
+cargo +1.74 build $CARGO_EXTRA_ARGS --release
 
 rm -f  $PREPARE_ALL_OUTPUT_DIR/system-driver-app || true
 cp ${RUST_TARGET_DIR}/bzl_gen_build_driver $PREPARE_ALL_OUTPUT_DIR/system-driver-app
@@ -41,8 +41,8 @@ cp ${RUST_TARGET_DIR}/bzl_gen_python_extractor $PREPARE_ALL_OUTPUT_DIR/python-en
 rm -f  $PREPARE_ALL_OUTPUT_DIR/protos-entity-extractor || true
 cp ${RUST_TARGET_DIR}/bzl_gen_protobuf_extractor $PREPARE_ALL_OUTPUT_DIR/protos-entity-extractor
 
-rm -f  $PREPARE_ALL_OUTPUT_DIR/jarscanner || true
-cp ${RUST_TARGET_DIR}/bzl_gen_jarscanner $PREPARE_ALL_OUTPUT_DIR/jarscanner
+# rm -f  $PREPARE_ALL_OUTPUT_DIR/jarscanner || true
+# cp ${RUST_TARGET_DIR}/bzl_gen_jarscanner $PREPARE_ALL_OUTPUT_DIR/jarscanner
 
 echo "workspace(name = \"external_build_tooling_gen\")" > $PREPARE_ALL_OUTPUT_DIR/WORKSPACE
 
