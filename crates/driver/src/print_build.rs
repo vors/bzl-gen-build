@@ -227,7 +227,7 @@ where
         } else {
             v.test_roots.clone()
         };
-        let matched_paths: Vec<String> = paths
+        let mut matched_paths: Vec<String> = paths
             .into_iter()
             .filter(|p| element.starts_with(p.as_str()))
             .take(2)
@@ -237,6 +237,11 @@ where
         if matched_paths.is_empty() {
             continue;
         }
+        // hack
+        matched_paths = matched_paths
+            .into_iter()
+            .filter(|p| "main" != p.as_str())
+            .collect();
         if matched_paths.len() > 1 {
             return Err(anyhow::anyhow!(
                 "Found too many paths for {}, at least: {:?}",
